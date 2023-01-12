@@ -1,1 +1,2 @@
-<h1>Listings</h1>
+<!-- Prvi primjer -->
+<h1><?php echo $heading; ?></h1>

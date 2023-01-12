@@ -58,9 +58,15 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
+// Views and passing data -----------------------------
 // nova home ruta
+// http://localhost:8000
 Route::get('/', function () {
-    return view('listings');
+    // passing data as array
+    // vrati view listings.php i pošalji mu data
+    return view('listings', [
+        'heading' => 'Latest Listings'
+    ]);
 });
 
 

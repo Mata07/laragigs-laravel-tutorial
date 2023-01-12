@@ -18,6 +18,28 @@ composer create-project laravel/laravel laragigs
 	Laravel Blade snippets - blade snippeti
 	Php Namespace Resolver  - importanje namespace i class
 
+---------------------------------------------
+   Views and Passing data
+---------------------------------------------
+
+1. Radimo view listings.php u /resources/Views
+
+<!-- Prvi primjer -->
+<h1><?php echo $heading; ?></
+
+2. ruta u web.php
+
+// Views and passing data -----------------------------
+// nova home ruta
+// http://localhost:8000
+Route::get('/', function () {
+    // passing data as array
+    // vrati view listings.php i pošalji mu data
+    return view('listings', [
+        'heading' => 'Latest Listings'
+    ]);
+});
+
 
 
 
