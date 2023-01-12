@@ -1,0 +1,30 @@
+Tutorial
+https://www.youtube.com/watch?v=MYyJ4PuL4pY
+
+github repo
+https://github.com/bradtraversy/laragigs
+
+1. kreiramo projekt u /html
+composer create-project laravel/laravel laragigs
+
+2. cd laragigs
+   code .
+   php artisan serve    - pokrećemo server
+   http://localhost:8000  - pokrećemo u firefoxu
+   
+3. Radimo primjere rute u /routes/web.php
+
+5. Ekstenzije za VS Code
+	Laravel Blade snippets - blade snippeti
+	Php Namespace Resolver  - importanje namespace i class
+
+
+
+
+
+
+
+
+
+
+
