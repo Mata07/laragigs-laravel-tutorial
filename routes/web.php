@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Listing;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,26 +70,58 @@ use Illuminate\Support\Facades\Route;
 //     ]);
 // });
 
+// // http://localhost:8000
+// Route::get('/', function () {
+//     // passing data as array
+//     // vrati view listings.php i pošalji mu data
+//     return view('listings', [
+//         'heading' => 'Latest Listings',
+//         'listings' => [
+//             [
+//                 'id' => 1,
+//                 'title' => 'Listing One',
+//                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget odio mauris. Quisque consectetur velit sit amet nisl accumsan rutrum. Cras non felis non neque egestas auctor. Nam magna libero, porttitor quis arcu id, scelerisque varius velit. Suspendisse sed urna in leo euismod venenatis. Vivamus ex justo, tempor vitae venenatis et, consequat sit amet lorem. Vivamus eget erat laoreet, elementum arcu a, vestibulum eros. Nullam fringilla enim est, sit amet ultrices leo dapibus vel. Cras non magna nisi.'
+//             ],
+//             [
+//                 'id' => 2,
+//                 'title' => 'Listing Two',
+//                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget odio mauris. Quisque consectetur velit sit amet nisl accumsan rutrum. Cras non felis non neque egestas auctor. Nam magna libero, porttitor quis arcu id, scelerisque varius velit. Suspendisse sed urna in leo euismod venenatis. Vivamus ex justo, tempor vitae venenatis et, consequat sit amet lorem. Vivamus eget erat laoreet, elementum arcu a, vestibulum eros. Nullam fringilla enim est, sit amet ultrices leo dapibus vel. Cras non magna nisi.'
+//             ]
+//         ]
+//     ]);
+// });
+
+
+// All Listings
 // http://localhost:8000
 Route::get('/', function () {
     // passing data as array
     // vrati view listings.php i pošalji mu data
     return view('listings', [
         'heading' => 'Latest Listings',
-        'listings' => [
-            [
-                'id' => 1,
-                'title' => 'Listing One',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget odio mauris. Quisque consectetur velit sit amet nisl accumsan rutrum. Cras non felis non neque egestas auctor. Nam magna libero, porttitor quis arcu id, scelerisque varius velit. Suspendisse sed urna in leo euismod venenatis. Vivamus ex justo, tempor vitae venenatis et, consequat sit amet lorem. Vivamus eget erat laoreet, elementum arcu a, vestibulum eros. Nullam fringilla enim est, sit amet ultrices leo dapibus vel. Cras non magna nisi.'
-            ],
-            [
-                'id' => 2,
-                'title' => 'Listing Two',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget odio mauris. Quisque consectetur velit sit amet nisl accumsan rutrum. Cras non felis non neque egestas auctor. Nam magna libero, porttitor quis arcu id, scelerisque varius velit. Suspendisse sed urna in leo euismod venenatis. Vivamus ex justo, tempor vitae venenatis et, consequat sit amet lorem. Vivamus eget erat laoreet, elementum arcu a, vestibulum eros. Nullam fringilla enim est, sit amet ultrices leo dapibus vel. Cras non magna nisi.'
-            ]
-        ]
+        // pozivamo static metodu all() iz Listing modela
+        'listings' => Listing::all()    
     ]);
 });
+
+
+// Single Listing
+// http://localhost:8000/1
+Route::get('/listings/{id}', function ($id) {
+    return view('listing', [
+        'listing' => Listing::find($id)
+    ]);
+});
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -100,6 +100,88 @@ listings.php :
 @endforeach
 
 
+---------------------------------
+    Basic Model
+---------------------------------
+1. Radimo model Listing u App/Models
+
+<?php
+
+namespace App\Models;
+
+class Listing {
+    public static function all() {
+        return [
+            [
+                'id' => 1,
+                'title' => 'Listing One',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget odio mauris. Quisque consectetur velit sit amet nisl accumsan rutrum. Cras non felis non neque egestas auctor. Nam magna libero, porttitor quis arcu id, scelerisque varius velit. Suspendisse sed urna in leo euismod venenatis. Vivamus ex justo, tempor vitae venenatis et, consequat sit amet lorem. Vivamus eget erat laoreet, elementum arcu a, vestibulum eros. Nullam fringilla enim est, sit amet ultrices leo dapibus vel. Cras non magna nisi.'
+            ],
+            [
+                'id' => 2,
+                'title' => 'Listing Two',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget odio mauris. Quisque consectetur velit sit amet nisl accumsan rutrum. Cras non felis non neque egestas auctor. Nam magna libero, porttitor quis arcu id, scelerisque varius velit. Suspendisse sed urna in leo euismod venenatis. Vivamus ex justo, tempor vitae venenatis et, consequat sit amet lorem. Vivamus eget erat laoreet, elementum arcu a, vestibulum eros. Nullam fringilla enim est, sit amet ultrices leo dapibus vel. Cras non magna nisi.'
+            ]
+        ];
+    }
+}
+
+
+2. Mijenjamo rutu u web.php
+
+use App\Models\Listing;
+
+// http://localhost:8000
+Route::get('/', function () {
+
+    return view('listings', [
+        'heading' => 'Latest Listings',
+        // pozivamo static metodu all() iz Listing modela
+        'listings' => Listing::all()    
+    ]);
+});
+
+
+3. Dodaj Metoda koja vraća samo jedan zapis po id u Listing.php modelu
+
+   // Metoda koja vraća samo jedan Listing po id
+    public static function find($id){
+        // pozovi static metodu all() i dohvati sve u var
+        $listings = self::all();    
+
+        // nađi po id i vrati
+        foreach($listings as $listing) {
+            if($listing['id'] == $id) {
+                return $listing;
+            }
+        }
+    }
+
+4. Radimo novu rutu u web.php
+
+// Single Listing
+Route::get('/listings/{id}', function ($id) {
+    return view('listing', [
+        'listing' => Listing::find($id)
+    ]);
+});
+
+
+5. Radimo novi view listing.blade.php
+
+<h2>{{ $listing['title'] }}</h2>
+<p>{{ $listing['description'] }}</p>
+
+6. Dodajemo link u listings.blade.php u foreach
+
+@foreach($listings as $listing)
+    <h2>
+        <a href="/listings/{{$listing['id']}}">{{ $listing['title'] }}</a>
+    </h2>
+    <p>
+        {{ $listing['description'] }}
+    </p>
+@endforeach
 
 
 
